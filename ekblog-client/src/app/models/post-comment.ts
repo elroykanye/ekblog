@@ -1,7 +1,8 @@
 export interface PostComment {
   id: number;
-  comment: string;
-  createdAt: string;
+  content: string;
+  createdAt?: string;
   authorName: string;
+  authorEmail: string;
   postId: number;
 }

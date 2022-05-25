@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, retry} from "rxjs";
+import {Observable} from "rxjs";
 import {Post} from "../models/post";
 
 @Injectable({
@@ -12,9 +12,7 @@ export class PostService {
   }
 
   getAllPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.postApiUrl).pipe(
-      retry(3)
-    );
+    return this.http.get<Post[]>(this.postApiUrl);
   }
 
   getPostById(id: number): Observable<Post> {
