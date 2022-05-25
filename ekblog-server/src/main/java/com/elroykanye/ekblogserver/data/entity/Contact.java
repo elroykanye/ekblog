@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "contact")
+@Table(name = "ekb_contact")
 public class Contact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

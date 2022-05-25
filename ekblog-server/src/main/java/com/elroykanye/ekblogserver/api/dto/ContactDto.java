@@ -2,8 +2,14 @@ package com.elroykanye.ekblogserver.api.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Data
-public record ContactDto(Long id, String name, String email, String subject, String message) implements Serializable {
+public record ContactDto(
+        Long id,
+        @NotNull String name,
+        @NotNull String email,
+        @NotNull String subject,
+        @NotNull String message
+) implements Serializable {
 }

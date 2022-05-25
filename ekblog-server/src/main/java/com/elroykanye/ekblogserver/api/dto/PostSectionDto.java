@@ -5,6 +5,5 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-@Data
 public record PostSectionDto(Long id, Integer order, String content, SectionType sectionType, Long postId)
         implements Serializable { }
