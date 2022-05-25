@@ -1,11 +1,30 @@
 package com.elroykanye.ekblogserver.business.mapper;
 
+import com.elroykanye.ekblogserver.api.dto.PostSectionDto;
+import com.elroykanye.ekblogserver.data.entity.PostSection;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring", implementationPackage="<PACKAGE_NAME>.impl")
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface PostSectionMapper {
+    @Mapping(source = "postId", target = "post.id")
+    PostSection postSectionDtoToPostSection(PostSectionDto postSectionDto);
 
-	PostSectionDto mapPostSectionToDto(PostSection postsection);
+    @Mapping(source = "post.id", target = "postId")
+    PostSectionDto postSectionToPostSectionDto(PostSection postSection);
 
-	PostSection mapDtoToPostSection(PostSectionDto postsectionDto);
+    @Mapping(source = "postId", target = "post.id")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updatePostSectionFromPostSectionDto(PostSectionDto postSectionDto, @MappingTarget PostSection postSection);
 
+    default List<Long> postSectionsToPostSectionIds(List<PostSection> postSections) {
+        return postSections.stream().map(PostSection::getId).collect(Collectors.toList());
+    }
 }

@@ -1,8 +1,10 @@
 package com.elroykanye.ekblogserver.api.dto;
 
+import com.elroykanye.ekblogserver.data.SectionType;
+import lombok.Data;
 
-@Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class PostSectionDto {
-}
+import java.io.Serializable;
+
+@Data
+public record PostSectionDto(Long id, Integer order, String content, SectionType sectionType, Long postId)
+        implements Serializable { }

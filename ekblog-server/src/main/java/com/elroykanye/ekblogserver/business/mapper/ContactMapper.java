@@ -1,11 +1,19 @@
 package com.elroykanye.ekblogserver.business.mapper;
 
+import com.elroykanye.ekblogserver.api.dto.ContactDto;
+import com.elroykanye.ekblogserver.data.entity.Contact;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring", implementationPackage="<PACKAGE_NAME>.impl")
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface ContactMapper {
+    Contact contactDtoToContact(ContactDto contactDto);
 
-	ContactDto mapContactToDto(Contact contact);
+    ContactDto contactToContactDto(Contact contact);
 
-	Contact mapDtoToContact(ContactDto contactDto);
-
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateContactFromContactDto(ContactDto contactDto, @MappingTarget Contact contact);
 }
