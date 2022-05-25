@@ -59,6 +59,7 @@ public class PostServiceImpl implements PostService {
         throw new EkblogException.NotFoundException("Post with id " + id + " not found");
     }
 
+    @Override
     public Post getPostEntity(Long id) {
         return postRepository.findById(id).orElseThrow(() -> {
             throw new EkblogException.NotFoundException("Post with id " + id + " not found");
