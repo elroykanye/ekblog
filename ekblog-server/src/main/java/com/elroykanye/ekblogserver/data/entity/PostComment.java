@@ -29,15 +29,18 @@ public class PostComment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "comment", nullable = false)
-	private String comment;
+	@Column(name = "content", nullable = false)
+	private String content;
 
 
 	@Column(name = "created_at", nullable = false, updatable = false)
 	private LocalDateTime createdAt;
 
-	@Column(name = "commentorName", nullable = false)
+	@Column(name = "author_name", nullable = false)
 	private String authorName;
+
+	@Column(name = "author_email")
+	private String authorEmail;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "post_id", nullable = false)
