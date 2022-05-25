@@ -3,13 +3,13 @@ import {PostSectionService} from "./services/post-section.service";
 import {PostCommentService} from "./services/post-comment.service";
 import {ContactService} from "./services/contact.service";
 
-const serverUrl = 'http://localhost:8091';
+const serverUrl = 'http://localhost:8080';
 
 const valueInjectables: Array<any> = [
-  {provide: "EKB_POST_API_URL", useValue: `https//${serverUrl}/api/post`},
-  {provide: "EKB_POST_SECTION_API_URL", useValue: `https//${serverUrl}/api/post/section`},
-  {provide: "EKB_POST_COMMENT_API_URL", useValue: `https//${serverUrl}/api/post/comment`},
-  {provide: "EKB_CONTACT_API_URL", useValue: `https//${serverUrl}/api/contact`},
+  {provide: "EKB_POST_API_URL", useValue: `${serverUrl}/api/post`},
+  {provide: "EKB_POST_SECTION_API_URL", useValue: `${serverUrl}/api/post/section`},
+  {provide: "EKB_POST_COMMENT_API_URL", useValue: `${serverUrl}/api/post/comment`},
+  {provide: "EKB_CONTACT_API_URL", useValue: `${serverUrl}/api/contact`},
 ];
 
 const serviceInjectables: Array<any> = [
