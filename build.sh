@@ -1,8 +1,13 @@
+NG_BUILD_DIST_PATH="./ekblog-client/dist/ekblog-client"
+NG_BUILD_RESOURCE_PATH="./ekblog-server/src/main/resources/ekblog-client"
 
 cd ./ekblog-client/
-npm install
-ng serve
+ng build
 cd ..
 
-cd ./ekblog-server/
-./mvnw spring-boot:run
+mkdir $NG_BUILD_RESOURCE_PATH
+cp -r $NG_BUILD_DIST_PATH $NG_BUILD_RESOURCE_PATH
+
+mvn package
+rm -rf $NG_BUILD_RESOURCE_PATH
+
