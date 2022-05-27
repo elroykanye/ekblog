@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-ek-header',
@@ -14,7 +14,9 @@ import { Component, OnInit } from '@angular/core';
         <nav id="navbar" class="navbar">
           <ul>
             <li *ngFor="let navItem of navItems">
-              <a class="nav-link scrollto {{navItem.active ? 'active': ''}}" [routerLink]="[navItem.link]" [fragment]="navItem.fragment" >{{navItem.text}}</a>
+              <a #navAnchor (click)="setActive(navItem.id)"
+                 class="nav-link scrollto {{navItem.id == currentNavItemId ? 'active': ''}}"
+                 [routerLink]="[navItem.link]" [fragment]="navItem.fragment">{{navItem.text}}</a>
             </li>
 
           </ul>
@@ -27,16 +29,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EkHeaderComponent implements OnInit {
 
-  navItems: {link: string; text: string; fragment: string; active: boolean}[] = [
-    {link: '/', text: 'Home', fragment: 'hero',  active: true},
-    {link: '/about', text: 'About', fragment: 'about',  active: false},
-    {link: '/blog', text: 'Blog', fragment: 'journal', active: false},
-    {link: '/portfolio', text: 'Portfolio', fragment: 'portfolio', active: false},
-    {link: '/contact', text: 'Contact', fragment: 'contact', active: false},
+
+  navItems: NavItem[] = [
+    {id: 0, link: '/', text: 'Home', fragment: 'hero', active: true},
+    {id: 1, link: '/about', text: 'About', fragment: 'about', active: false},
+    {id: 2, link: '/blog', text: 'Blog', fragment: 'journal', active: false},
+    {id: 3, link: '/portfolio', text: 'Portfolio', fragment: 'portfolio', active: false},
+    {id: 4, link: '/', text: 'Contact', fragment: 'contact', active: false},
   ]
-  constructor() { }
+  currentNavItemId: number = -1;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  setActive(id: number) {
+    this.currentNavItemId = id;
+  }
+}
+
+type NavItem = {
+  id: number,
+  text: string,
+  link: string,
+  fragment: string,
+  active: boolean
 }
