@@ -6,9 +6,16 @@ import {EkBlogComponent} from "./components/ek-blog/ek-blog.component";
 import {EkPortfolioComponent} from "./components/ek-portfolio/ek-portfolio.component";
 import {EkAboutComponent} from "./components/ek-about/ek-about.component";
 import {EkBlogPostComponent} from "./components/ek-blog-post/ek-blog-post.component";
+import {AdmPostsComponent} from "./components/adm-posts/adm-posts.component";
 
 const routes: Routes = [
-  {path: '', component: EkHomeComponent},
+  {
+    path: '',
+    component: EkHomeComponent,
+    data: {
+      animation: 'openClosePage'
+    }
+  },
   {path: 'about', component: EkAboutComponent},
   {path: 'contact', component: EkContactComponent},
   {
@@ -17,7 +24,12 @@ const routes: Routes = [
     children: []
   },
   {path: 'post/:id', component: EkBlogPostComponent},
-  {path: 'portfolio', component: EkPortfolioComponent}
+  {path: 'portfolio', component: EkPortfolioComponent},
+  {path: 'adm-posts', component: AdmPostsComponent},
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
 
 @NgModule({

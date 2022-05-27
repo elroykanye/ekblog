@@ -17,6 +17,11 @@ import {EkFooterComponent} from './components/ek-footer/ek-footer.component';
 import {EkAboutComponent} from './components/ek-about/ek-about.component';
 import {APP_INJECTABLES} from "./app.injectables";
 import {HttpClientModule} from "@angular/common/http";
+import {AdmPostsComponent} from './components/adm-posts/adm-posts.component';
+import {AdmContactsComponent} from './components/adm-contacts/adm-contacts.component';
+import {AdmEditPostComponent} from './components/adm-edit-post/adm-edit-post.component';
+import {AdmDelPostComponent} from './components/adm-del-post/adm-del-post.component';
+import {AdmComponent} from './components/adm/adm.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import {HttpClientModule} from "@angular/common/http";
     EkPortfolioComponent,
     EkHeaderComponent,
     EkFooterComponent,
-    EkAboutComponent
+    EkAboutComponent,
+    AdmPostsComponent,
+    AdmContactsComponent,
+    AdmEditPostComponent,
+    AdmDelPostComponent,
+    AdmComponent
   ],
   imports: [
     BrowserModule,
