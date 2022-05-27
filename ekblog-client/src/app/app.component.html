@@ -1,6 +1,4 @@
-<!-- ======= Header ======= -->
 <app-ek-header></app-ek-header>
-<!-- ======= Hero Section ======= -->
 <div id="hero" class="home">
 
   <div class="container">
@@ -8,7 +6,7 @@
       <h1>I'm
         <ngx-typed-js
           [strings]="['Elroy Kanye', 'Developer', 'Designer', 'Engineer', 'Furiously Typing']"
-          [smartBackspace]="true" [loop]="true" [typeSpeed]="64" [shuffle]="true" [backSpeed]="32">
+          [backSpeed]="96" [loop]="true" [shuffle]="true" [smartBackspace]="true" [typeSpeed]="128">
           <span class="typing"></span>
         </ngx-typed-js>
       </h1>
@@ -26,14 +24,10 @@
 </div>
 
 <main id="main">
-
   <router-outlet></router-outlet>
-
-</main><!-- End #main -->
+</main>
 
 <app-ek-footer></app-ek-footer>
-
-
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
   <i class="bi bi-arrow-up-short"></i>
 </a>
