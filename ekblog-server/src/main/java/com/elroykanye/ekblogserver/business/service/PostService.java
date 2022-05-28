@@ -13,6 +13,8 @@ public interface PostService {
 
     PostDto getPostById(Long id);
 
+    EkbResponse updateById(Long id, PostDto postDto);
+
     void deletePostById(Long id);
 
     Post getPostEntity(Long id);

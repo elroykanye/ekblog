@@ -42,8 +42,11 @@ public class Post {
 	private LocalDateTime createdAt;
 
 	@UpdateTimestamp
-	@Column(name = "updatedAt", nullable = false)
+	@Column(name = "updated_at", nullable = false)
 	private LocalDateTime updatedAt;
+
+	@Column(name = "draft")
+	private Boolean draft;
 
 	@Builder.Default
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)

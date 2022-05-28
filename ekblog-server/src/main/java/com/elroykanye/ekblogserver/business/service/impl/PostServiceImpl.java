@@ -8,7 +8,7 @@ import com.elroykanye.ekblogserver.data.entity.Post;
 import com.elroykanye.ekblogserver.data.entity.PostSection;
 import com.elroykanye.ekblogserver.data.repository.PostRepository;
 import com.elroykanye.ekblogserver.data.repository.PostSectionRepository;
-import com.elroykanye.ekblogserver.exception.advice.EkblogException;
+import com.elroykanye.ekblogserver.exception.EkblogException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +49,14 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostDto getPostById(Long id) {
         return postMapper.postToPostDto(getPostEntity(id));
+    }
+
+    @Override
+    public EkbResponse updateById(Long id, PostDto postDto) {
+        Post existingPost = getPostEntity(id);
+        existingPost.setTitle(postDto.title());
+        existingPost.setDraft(postDto.draft());
+        return new EkbResponse(postRepository.save(existingPost).getId(), "Post updated successfully");
     }
 
     @Override
