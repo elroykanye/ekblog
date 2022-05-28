@@ -7,6 +7,6 @@ export interface PostSection {
   postId: number;
 }
 
-enum SectionType {
+export enum SectionType {
   PARAGRAPH, BLOCKQUOTE
 }
