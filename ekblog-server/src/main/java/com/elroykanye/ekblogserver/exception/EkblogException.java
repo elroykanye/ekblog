@@ -1,4 +1,4 @@
-package com.elroykanye.ekblogserver.exception.advice;
+package com.elroykanye.ekblogserver.exception;
 
 import org.springframework.http.HttpStatus;
 
