@@ -22,6 +22,7 @@ import {AdmContactsComponent} from './components/adm-contacts/adm-contacts.compo
 import {AdmEditPostComponent} from './components/adm-edit-post/adm-edit-post.component';
 import {AdmDelPostComponent} from './components/adm-del-post/adm-del-post.component';
 import {AdmComponent} from './components/adm/adm.component';
+import {AdmAddPostComponent} from './components/adm-add-post/adm-add-post.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {AdmComponent} from './components/adm/adm.component';
     AdmContactsComponent,
     AdmEditPostComponent,
     AdmDelPostComponent,
-    AdmComponent
+    AdmComponent,
+    AdmAddPostComponent
   ],
   imports: [
     BrowserModule,

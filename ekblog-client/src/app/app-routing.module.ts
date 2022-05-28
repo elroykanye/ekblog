@@ -7,6 +7,7 @@ import {EkPortfolioComponent} from "./components/ek-portfolio/ek-portfolio.compo
 import {EkAboutComponent} from "./components/ek-about/ek-about.component";
 import {EkBlogPostComponent} from "./components/ek-blog-post/ek-blog-post.component";
 import {AdmPostsComponent} from "./components/adm-posts/adm-posts.component";
+import {AdmAddPostComponent} from "./components/adm-add-post/adm-add-post.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'post/:id', component: EkBlogPostComponent},
   {path: 'portfolio', component: EkPortfolioComponent},
   {path: 'adm-posts', component: AdmPostsComponent},
+  {path: 'adm-add-post', component: AdmAddPostComponent},
   {
     path: '**',
     redirectTo: '',
