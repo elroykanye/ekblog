@@ -1,0 +1,44 @@
+<section>
+  <div class="py-5">
+    <div class="container">
+      <form [formGroup]="addPostForm">
+        <div class="row gy-3">
+
+          <div class="col-lg-6">
+            <div class="form-group contact-block1">
+              <input [formControlName]="'title'" class="form-control" id="title" name="title" placeholder="Title"
+                     type="text">
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="form-group">
+              <input [formControlName]="'image'" class="form-control" id="image" name="image" placeholder="Image"
+                     type="file">
+            </div>
+          </div>
+          <div [formArrayName]="'sections'" class="col-lg-12">
+            <div *ngFor="let sectionForm of sections.controls; let i = index" class="form-group">
+              <div [formGroupName]="i">
+                <input [formControlName]="'sectionType'"
+                       type="checkbox"> {{sectionForm.value.sectionType ? 'Paragraph' : 'Blockquote'}}
+                <textarea [formControlName]="'content'" class="form-control" id="description" name="description"
+                          placeholder="Section" style="height: 320px"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="form-group d-flex">
+              <button (click)="addSectionAction()" class="btn">Add section</button>
+              <span class="spacer"></span>
+              <button (click)="addPostAction()" class="btn btn-primary" type="submit">Submit</button>
+              <button (click)="updatePostAction()" [disabled]="!postUpdate" class="btn btn-primary" type="submit">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
