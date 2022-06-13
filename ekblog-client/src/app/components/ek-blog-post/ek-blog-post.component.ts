@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Post} from "../../models/post";
 import {ActivatedRoute} from "@angular/router";
-import {PostService} from "../../services/post.service";
+import {PostService, PostServiceHelper} from "../../services/post.service";
 import {PostComment} from "../../models/post-comment";
 import {PostCommentService} from "../../services/post-comment.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -14,7 +14,7 @@ import {EkbResponse} from "../../models/ekb-response";
 })
 export class EkBlogPostComponent implements OnInit {
 
-  post: Post = {id: 0, title: '', imageUrl: '', sections: []};
+  post: Post = {id: 0, title: '', image: [], draft: true, sections: []};
   comments: PostComment[] = [];
   commentForm: FormGroup;
 
@@ -35,6 +35,7 @@ export class EkBlogPostComponent implements OnInit {
   }
 
   loadPost(postId: number): void {
+    PostServiceHelper.loadPost(postId, this.postService).then(r => this.post = r);
     this.postService.getPostById(postId).subscribe({
       next: (post: Post) => {
         this.post = post;

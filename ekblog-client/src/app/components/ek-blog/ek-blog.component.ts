@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PostService} from "../../services/post.service";
+import {PostService, PostServiceHelper} from "../../services/post.service";
 import {DEFAULT_POSTS_DISPLAY, Post, PostDisplay, PostUtil} from "../../models/post";
 
 @Component({
@@ -40,15 +40,9 @@ export class EkBlogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.postService.getAllPosts().subscribe({
-      next: (posts) => {
-        this.posts = posts;
-        console.log(posts)
-        this.processPosts(posts)
-      },
-      error: (err) => {
-        console.log(err);
-      }
+    PostServiceHelper.loadPosts(this.postService, this.displayPosts).then(r => {
+      this.processPosts(r);
+      console.log("loaded")
     });
   }
 
