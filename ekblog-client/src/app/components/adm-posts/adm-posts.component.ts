@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Post} from "../../models/post";
-import {PostService} from "../../services/post.service";
+import {PostService, PostServiceHelper} from "../../services/post.service";
 
 @Component({
   selector: 'app-adm-posts',
@@ -16,15 +16,16 @@ import {PostService} from "../../services/post.service";
           </div>
           <div class="row p-3" *ngFor="let post of posts">
             <div class="col-md-10">
-              <span class="h4">{{post.title}}</span>
+              <span class="h5">{{post.title}}</span>
               <div>
                 <span class="">{{post.sections.length}}</span><br>
                 <span class="">{{post.createdAt}}</span><br>
+                <span>{{post.draft || post.draft == null ? 'DRAFT' : 'PUBLISHED'}}</span>
               </div>
             </div>
             <div class="col-md-2">
-              <button class="btn btn-primary w-100">Edit</button>
-              <button class="btn btn-danger w-100">Delete</button>
+              <button (click)="openEditPostAction(post)" class="btn btn-primary w-100">Edit</button>
+              <button (click)="flipDraftPostAction(post)" class="btn btn-danger w-100">Draft</button>
             </div>
           </div>
         </div>
@@ -40,14 +41,18 @@ export class AdmPostsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.postService.getAllPosts().subscribe({
-      next: (posts) => {
-        this.posts = posts;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    PostServiceHelper.loadPosts(this.postService).then(r => {
+      this.posts = r;
+    });
   }
 
+
+  openEditPostAction(post: Post) {
+
+  }
+
+  flipDraftPostAction(post: Post) {
+    post.draft = !post.draft;
+    PostServiceHelper.updatePost(post, this.postService, this.posts);
+  }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Post} from "../../models/post";
-import {PostService} from "../../services/post.service";
+import {PostService, PostServiceHelper} from "../../services/post.service";
 
 @Component({
   selector: 'app-adm-add-post',
@@ -12,12 +12,14 @@ export class AdmAddPostComponent implements OnInit {
 
   postUpdate: boolean;
   addPostForm: FormGroup;
+  postImage!: File;
 
   constructor(private fb: FormBuilder, private postService: PostService) {
     this.postUpdate = false
     this.addPostForm = fb.group({
       title: ['', Validators.required],
       image: ['', Validators.required],
+      draft: [''],
       sections: fb.array([
         fb.group({
           id: [-1],
@@ -27,7 +29,6 @@ export class AdmAddPostComponent implements OnInit {
         })
       ])
     });
-
   }
 
   get sections() {
@@ -38,10 +39,12 @@ export class AdmAddPostComponent implements OnInit {
   }
 
   addPostAction() {
+    // TODO get photo from the form
     const post: Post = {
       id: -1,
       title: this.addPostForm.get('title')?.value,
-      imageUrl: this.addPostForm.get('image')?.value,
+      image: [],
+      draft: !!this.addPostForm.get('draft')?.value,
       sections: []
     }
     this.sections.controls.forEach(sectionControl => {
@@ -54,14 +57,7 @@ export class AdmAddPostComponent implements OnInit {
       post.sections.push(section)
     });
     console.log(post)
-    this.postService.createPost(post).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    PostServiceHelper.addPost(post, this.postService, this.postImage);
   }
 
   updatePostAction() {
@@ -76,5 +72,14 @@ export class AdmAddPostComponent implements OnInit {
       sectionType: ['', Validators.required]
     });
     this.sections.push(sectionForm);
+  }
+
+  onFileChanged($event: Event) {
+    if ($event.target instanceof HTMLInputElement) {
+      if ($event.target.files) {
+        this.postImage = $event.target.files[0];
+        console.log(this.postImage)
+      }
+    }
   }
 }
