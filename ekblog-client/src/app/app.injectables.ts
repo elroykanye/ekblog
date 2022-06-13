@@ -3,7 +3,7 @@ import {PostSectionService} from "./services/post-section.service";
 import {PostCommentService} from "./services/post-comment.service";
 import {ContactService} from "./services/contact.service";
 
-const serverUrl = 'http://localhost:8080';
+const serverUrl = 'http://localhost:8091';
 
 const valueInjectables: Array<any> = [
   {provide: "EKB_POST_API_URL", useValue: `${serverUrl}/api/post`},
