@@ -2,8 +2,9 @@ import {PostSection} from "./post-section";
 
 export interface Post {
   id: number;
-  imageUrl: string;
+  image: number[];
   title: string;
+  draft: boolean;
   sections: PostSection[];
   createdAt?: string;
   numberOfComments?: number;
@@ -11,7 +12,7 @@ export interface Post {
 
 export interface PostDisplay {
   id: number;
-  image: string;
+  image: number[];
   title: string;
   introText: string
 }
@@ -19,7 +20,6 @@ export interface PostDisplay {
 
 export module PostUtil {
   export const getFirstSection = (post: Post): PostSection => {
-    console.log(post)
     let section: PostSection = post.sections[0];
     for (let i = 0; i < post.sections.length; i++) {
       if (post.sections[i].order < section.order) {
@@ -39,12 +39,14 @@ export module PostUtil {
   export const getPostDisplays = (posts: Post[]): PostDisplay[] => {
     let postDisplays: PostDisplay[] = [];
     for (let i = 0; i < posts.length; i++) {
-      postDisplays.push({
-        id: posts[i].id,
-        image: posts[i].imageUrl,
-        title: posts[i].title,
-        introText: getIntroText(posts[i])
-      });
+      if (!posts[i].draft && posts[i].draft != null) {
+        postDisplays.push({
+          id: posts[i].id,
+          image: posts[i].image,
+          title: posts[i].title,
+          introText: getIntroText(posts[i])
+        });
+      }
     }
     return postDisplays;
   }
@@ -52,8 +54,9 @@ export module PostUtil {
 
 export const defaultPost: Post = {
   id: 0,
-  imageUrl: '',
+  image: [],
   title: '',
+  draft: true,
   sections: [],
   createdAt: '',
   numberOfComments: 0
@@ -61,19 +64,19 @@ export const defaultPost: Post = {
 export const DEFAULT_POSTS_DISPLAY: PostDisplay[] = [
   {
     id: -1,
-    image: "assets/img/blog-post-1.jpg",
+    image: [],
     title: "How to get started with Angular",
     introText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis..."
   },
   {
     id: -1,
-    image: "assets/img/blog-post-1.jpg",
+    image: [],
     title: "How to get started with Angular",
     introText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis..."
   },
   {
     id: -1,
-    image: "assets/img/blog-post-1.jpg",
+    image: [],
     title: "How to get started with Angular",
     introText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis..."
   }

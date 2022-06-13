@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping(value = "/")
 public class EkbController {
-    @RequestMapping(value = "")
+    @RequestMapping(value = "va")
     @ResponseBody
     public String home() {
         return "forward:index.html";

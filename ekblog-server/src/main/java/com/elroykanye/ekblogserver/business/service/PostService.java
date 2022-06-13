@@ -3,6 +3,7 @@ package com.elroykanye.ekblogserver.business.service;
 import com.elroykanye.ekblogserver.api.dto.PostDto;
 import com.elroykanye.ekblogserver.api.response.EkbResponse;
 import com.elroykanye.ekblogserver.data.entity.Post;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface PostService {
     void deletePostById(Long id);
 
     Post getPostEntity(Long id);
+
+    EkbResponse updateImage(Long postId, MultipartFile image);
 }

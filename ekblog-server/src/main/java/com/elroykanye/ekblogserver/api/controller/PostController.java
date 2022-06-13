@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -26,9 +28,15 @@ import java.util.List;
 @RequestMapping(value = "/api/post")
 public class PostController {
     private final PostService postService;
+
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EkbResponse> createPost(@Valid @RequestBody PostDto postDto) {
         return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/image/{postId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<EkbResponse> updatePostImage(@PathVariable("postId") Long postId, @RequestParam("image") MultipartFile image) {
+        return ResponseEntity.ok(postService.updateImage(postId, image));
     }
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)

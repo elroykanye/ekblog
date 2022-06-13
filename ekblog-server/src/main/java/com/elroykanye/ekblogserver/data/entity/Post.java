@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PostPersist;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,8 +33,8 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "image_url", nullable = false)
-    private String imageUrl;
+	@Column(name = "image", nullable = false)
+	private String image;
 
 	@Column(name = "title", nullable = false)
 	private String title;
@@ -56,4 +57,10 @@ public class Post {
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<PostComment> comments = new ArrayList<>();
 
+	@PostPersist
+	public void postPersist() {
+		if (image == null) {
+			image = "";
+		}
+	}
 }

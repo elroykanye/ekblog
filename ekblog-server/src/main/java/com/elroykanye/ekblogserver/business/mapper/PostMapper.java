@@ -12,11 +12,14 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", uses = {PostSectionMapper.class}, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface PostMapper {
+    @Mapping(target = "image", ignore = true)
     Post postDtoToPost(PostDto postDto);
 
     @Mapping(source = "postSections", target = "sections")
+    @Mapping(target = "image", ignore = true)
     @Mapping(target = "numberOfComments", expression = "java(post.getComments().size())")
     PostDto postToPostDto(Post post);
+
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updatePostFromPostDto(PostDto postDto, @MappingTarget Post post);

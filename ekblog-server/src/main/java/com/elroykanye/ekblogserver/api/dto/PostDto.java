@@ -11,7 +11,7 @@ import java.util.List;
 
 public record PostDto(
         @JsonProperty(value = "id") Long id,
-        @JsonProperty(value = "imageUrl") String imageUrl,
+        @JsonProperty(value = "image") String image,
         @JsonProperty(value = "title") String title,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
         LocalDateTime createdAt,

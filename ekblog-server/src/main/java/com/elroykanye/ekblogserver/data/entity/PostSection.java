@@ -32,7 +32,7 @@ public class PostSection {
 	@Column(name = "section_order", nullable = false)
 	private Integer order;
 
-	@Column(name = "content", nullable = false)
+	@Column(name = "content", nullable = false, length = 4096)
 	private String content;
 
 	@Enumerated
