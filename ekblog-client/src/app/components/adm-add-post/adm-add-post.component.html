@@ -10,18 +10,24 @@
                      type="text">
             </div>
           </div>
-
           <div class="col-lg-6">
             <div class="form-group">
-              <input [formControlName]="'image'" class="form-control" id="image" name="image" placeholder="Image"
+              <input (change)="onFileChanged($event)" [formControlName]="'image'" class="form-control" id="image"
+                     name="image" placeholder="Image"
                      type="file">
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="form-group">
+              <input [formControlName]="'draft'" id="draft" name="draft" type="checkbox">&nbsp;
+              <span>{{addPostForm.value.draft ? 'Draft' : 'Published'}}</span>
             </div>
           </div>
           <div [formArrayName]="'sections'" class="col-lg-12">
             <div *ngFor="let sectionForm of sections.controls; let i = index" class="form-group">
               <div [formGroupName]="i">
-                <input [formControlName]="'sectionType'"
-                       type="checkbox"> {{sectionForm.value.sectionType ? 'Paragraph' : 'Blockquote'}}
+                <input [formControlName]="'sectionType'" type="checkbox">&nbsp;
+                <span>{{sectionForm.value.sectionType ? 'Paragraph' : 'Blockquote'}}</span>
                 <textarea [formControlName]="'content'" class="form-control" id="description" name="description"
                           placeholder="Section" style="height: 320px"></textarea>
               </div>
