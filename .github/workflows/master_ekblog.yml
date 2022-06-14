@@ -30,10 +30,11 @@ jobs:
           npm run build --if-present
 
       - name: Upload artifact for deployment job
+        working-directory: ./ekblog-client
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: ./ekblog-client
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
