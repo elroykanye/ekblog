@@ -2,8 +2,9 @@ import {PostService} from "./services/post.service";
 import {PostSectionService} from "./services/post-section.service";
 import {PostCommentService} from "./services/post-comment.service";
 import {ContactService} from "./services/contact.service";
+import {environment} from "../environments/environment";
 
-const serverUrl = 'http://localhost:8091';
+const serverUrl: string = environment.apiHost;
 
 const valueInjectables: Array<any> = [
   {provide: "EKB_POST_API_URL", useValue: `${serverUrl}/api/post`},
