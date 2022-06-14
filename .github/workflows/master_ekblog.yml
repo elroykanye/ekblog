@@ -56,8 +56,8 @@ jobs:
 
       - name: Unzip artifact for deployment
         uses: montudor/action-zip@v1
-          with:
-            args: unzip -qq -r release.zip -d ./
+        with:
+          args: unzip -qq -r release.zip -d ./
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
