@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'ekblog'
           slot-name: 'server'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BC329CACE838494D9029DBAD9C2F30E6 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E50DA6C118F14A6C8B4B1D8FE0A60ED4 }}
           package: '*.jar'
