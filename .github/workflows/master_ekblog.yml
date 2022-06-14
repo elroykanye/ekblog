@@ -11,10 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./ekblog-client
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -28,15 +25,13 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
+          npm run test --if-present
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: '${{ github.workspace }}/ekblog-client/release.zip'
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,14 +46,11 @@ jobs:
         with:
           name: node-app
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-
       - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp
         with:
           app-name: 'ekblog'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A56CA2F824024F4DA3FBC3DAB36BA7FC }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E50DA6C118F14A6C8B4B1D8FE0A60ED4 }}
           package: .
